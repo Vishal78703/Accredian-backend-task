@@ -55,12 +55,12 @@ app.post('/signup', async (req, res) => {
 
 // RESTful endpoint for user login
 app.post('/login', (req, res) => {
-  const { email, password } = req.body;
+  const {usernameOrEmail, password } = req.body;
 
-  console.log('Received login request for email:', email);
+  console.log('Received login request for email:', usernameOrEmail);
 
   // Check if the email exists in the database
-  db.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
+  db.query('SELECT * FROM users WHERE email = ?', [usernameOrEmail], async (err, results) => {
     if (err) {
       return res.status(500).json({ error: 'Internal Server Error' });
     }
